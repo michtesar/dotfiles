@@ -1,0 +1,111 @@
+{
+  // Set default formatter for TypeScript and Javascript files
+  "[typescript][typescriptreact][javascript][javascriptreact][css][scss][html]": {
+    "editor.defaultFormatter": "biomejs.biome",
+    "editor.codeActionsOnSave": {
+      "source.fixAll.biome": "always",
+      "source.organizeImports.biome": "always"
+    }
+  },
+
+  // Set default formatter for JSONC files
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+
+  // Python-specific settings
+  "[python]": {
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "always",
+      "source.fixAll": "always"
+    },
+    "editor.defaultFormatter": "charliermarsh.ruff"
+  },
+  "python.testing.pytestEnabled": true,
+  "python.testing.unittestEnabled": false,
+  // "pythonTestExplorer.testFramework": "pytest",
+
+  // Auto Docstring settings
+  "autoDocstring.includeExtendedSummary": true,
+  "autoDocstring.docstringFormat": "google-notypes",
+
+  // Disable focus border colors
+  "workbench.colorCustomizations": {
+    "focusBorder": "#00000000",
+    "editorGroup.focusedBorder": "#00000000",
+    "editor.focusedStackFrameHighlightBackground": "#00000000"
+  },
+
+  // Additional settings
+  "editor.formatOnSave": true, // Enable format on save globally
+  "editor.foldingImportsByDefault": true, // Fold imports by default
+  "editor.inlineSuggest.enabled": true, // Enable inline suggestions
+  "editor.stickyScroll.enabled": true, // Enable sticky scroll - shows context of current code block
+  "editor.linkedEditing": true, // Enable linked editing for tags and brackets
+  "editor.minimap.enabled": false, // Disable minimap
+  "editor.smoothScrolling": true, // Enable smooth scrolling
+  "editor.cursorSmoothCaretAnimation": "on", // Smooth cursor animation
+  "editor.quickSuggestionsDelay": 0, // No delay for quick suggestions
+  "editor.formatOnPaste": true, // Format code on paste
+  "explorer.confirmDelete": false, // Disable delete confirmation in explorer
+  "window.commandCenter": true, // Enable command center for debugging
+  "files.insertFinalNewline": true, // Ensure files end with a newline
+  "files.trimTrailingWhitespace": true, // Trim trailing whitespace on save
+  "terminal.integrated.fontLigatures.enabled": true, // Enable font ligatures in terminal
+  "diffEditor.codeLens": true, // Enable code lens in diff editor
+  "debug.toolBarLocation": "docked", // Dock debug toolbar
+
+  // Container configuration
+  "containers.containerClient": "com.microsoft.visualstudio.containers.podman",
+  "containers.orchestratorClient": "com.microsoft.visualstudio.orchestrators.podmancompose",
+
+  // Yaml configuration
+  "redhat.telemetry.enabled": false,
+
+  // Exclude commong files and folders from the file explorer
+  "search.exclude": {
+    "**/.venv": true,
+    "**/__pycache__": true,
+    "**/dist": true,
+    "**/node_modules": true
+  },
+  "files.exclude": {
+    "**.venv": true,
+    "**/__pycache__": true,
+    "**/.ruff_cache": true,
+    "**/.pytest_cache": true,
+    "**/dist": true,
+    "**/node_modules": true
+  },
+  "explorer.confirmDragAndDrop": false,
+  "cSpell.userWords": [
+    "aiosqlite",
+    "autogeneration",
+    "doesn",
+    "extractus",
+    "mktime",
+    "mult",
+    "Ollama",
+    "pyproject",
+    "pytest",
+    "sessionmaker",
+    "TAVILY",
+    "teleporter"
+  ],
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "git.autofetch": true,
+  "git.confirmSync": false,
+  "[markdown]": {
+    "editor.defaultFormatter": "DavidAnson.vscode-markdownlint"
+  },
+
+  "window.autoDetectColorScheme": true,
+  "workbench.preferredDarkColorTheme": "Cursor Dark",
+  "workbench.preferredLightColorTheme": "Cursor Light",
+  "zig.zls.enabled": "on",
+  "gitlens.ai.model": "gitkraken",
+  "gitlens.ai.gitkraken.model": "gemini:gemini-2.0-flash"
+}
