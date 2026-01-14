@@ -23,7 +23,6 @@ window-padding-color = background
 
 # Shell
 shell-integration-features = true
-confirm-close = false
 
 quit-after-last-window-closed=true
 
