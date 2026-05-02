@@ -57,6 +57,15 @@ It usually lives at:
 ~/.local/share/chezmoi
 ```
 
+If you are using a separate checkout instead of the default source path, pass it
+explicitly:
+
+```sh
+chezmoi --source /private/tmp/dotfiles-chezmoi-https status
+chezmoi --source /private/tmp/dotfiles-chezmoi-https diff ~/.config/tmux/tmux.conf
+chezmoi --source /private/tmp/dotfiles-chezmoi-https add ~/.config/tmux/tmux.conf
+```
+
 Files in the source repo use chezmoi naming conventions:
 
 ```text
@@ -184,6 +193,14 @@ chezmoi managed
 chezmoi diff
 ```
 
+When working from this repository checkout directly, use the explicit source
+path:
+
+```sh
+chezmoi --source /private/tmp/dotfiles-chezmoi-https status
+chezmoi --source /private/tmp/dotfiles-chezmoi-https diff
+```
+
 Apply source state to your home directory:
 
 ```sh
@@ -249,9 +266,9 @@ The whole flow is:
 
 ```text
 edit ~/.config/tmux/tmux.conf
-chezmoi diff ~/.config/tmux/tmux.conf
-chezmoi add ~/.config/tmux/tmux.conf
-chezmoi cd
+chezmoi --source /private/tmp/dotfiles-chezmoi-https diff ~/.config/tmux/tmux.conf
+chezmoi --source /private/tmp/dotfiles-chezmoi-https add ~/.config/tmux/tmux.conf
+cd /private/tmp/dotfiles-chezmoi-https
 git diff
 git add .
 git commit
