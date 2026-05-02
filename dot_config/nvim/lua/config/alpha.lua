@@ -1,21 +1,21 @@
 local M = {}
 
-local banners = {
-  {
-    [[  ██████╗ ███████╗███╗   ██╗ █████╗ ██╗██████╗ ]],
-    [[ ██╔════╝ ██╔════╝████╗  ██║██╔══██╗██║██╔═══██╗]],
-    [[ ██║  ███╗█████╗  ██╔██╗ ██║███████║██║██║   ██║]],
-    [[ ██║   ██║██╔══╝  ██║╚██╗██║██╔══██║██║██║▄▄ ██║]],
-    [[ ╚██████╔╝███████╗██║ ╚████║██║  ██║██║╚██████╔╝]],
-    [[  ╚═════╝ ╚══════╝╚═╝  ╚═══╝╚═╝  ╚═╝╚═╝ ╚══▀▀═╝ ]],
-    [[             LOW LATENCY / HIGH DRAMA            ]],
-  },
+local banner = {
+  [[███╗   ███╗███████╗ ██████╗██╗  ██╗ █████╗ ███╗   ██╗██╗ ██████╗██╗     ███████╗███████╗]],
+  [[████╗ ████║██╔════╝██╔════╝██║  ██║██╔══██╗████╗  ██║██║██╔════╝██║     ██╔════╝██╔════╝]],
+  [[██╔████╔██║█████╗  ██║     ███████║███████║██╔██╗ ██║██║██║     ██║     █████╗  ███████╗]],
+  [[██║╚██╔╝██║██╔══╝  ██║     ██╔══██║██╔══██║██║╚██╗██║██║██║     ██║     ██╔══╝  ╚════██║]],
+  [[██║ ╚═╝ ██║███████╗╚██████╗██║  ██║██║  ██║██║ ╚████║██║╚██████╗███████╗███████╗███████║]],
+  [[╚═╝     ╚═╝╚══════╝ ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝ ╚═════╝╚══════╝╚══════╝╚══════╝]],
+  [[]],
+  [[        [ root@mechanicles ~/lab ]$ ./build_future --with-robots --no-mercy]],
+  [[]],
+  [[                 ╔══════════════════════════════════════╗]],
+  [[                 ║   MECHANICLES // ROBOTIC MISCHIEF   ║]],
+  [[                 ╚══════════════════════════════════════╝]],
+  [[]],
+  [[        ⚙️  code. metal. ghosts in machines.]],
 }
-
-local function pick_banner()
-  local day = tonumber(os.date("%d")) or 1
-  return banners[(day % #banners) + 1]
-end
 
 function M.setup()
   local ok_dashboard, dashboard = pcall(require, "alpha.themes.dashboard")
@@ -24,14 +24,13 @@ function M.setup()
   end
 
   dashboard.section.header.opts.position = "center"
-  dashboard.section.header.val = pick_banner()
+  dashboard.section.header.val = banner
 
   dashboard.section.buttons.opts.position = "center"
   dashboard.section.buttons.val = {
     dashboard.button("f", "  Find file", ":Telescope find_files<CR>"),
     dashboard.button("r", "  Recent files", ":Telescope oldfiles<CR>"),
     dashboard.button("g", "  Live grep", ":Telescope live_grep<CR>"),
-    dashboard.button("e", "󰙅  Explorer", ":Neotree toggle<CR>"),
     dashboard.button("c", "  Config", ":e ~/.config/nvim/init.lua<CR>"),
     dashboard.button("q", "󰩈  Quit", ":qa<CR>"),
   }

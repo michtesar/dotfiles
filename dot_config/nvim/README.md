@@ -36,7 +36,6 @@ Then inside Neovim:
 
 - Catppuccin, matching macOS light/dark
 - Telescope for files, grep, buffers, old files
-- Neo-tree for a file tree
 - LSP, format-on-save, diagnostics
 - Ruff, Biome, Taplo
 - LazyGit and LazyDocker terminals
@@ -51,8 +50,7 @@ Then inside Neovim:
 <leader>fb  buffers
 <leader>fr  recent files
 <leader>.   recent files, fast
-<leader>n   file tree
-
+<leader>n   explorer
 gd          definition
 gr          references
 K           hover
