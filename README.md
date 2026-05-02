@@ -1,42 +1,42 @@
 # dotfiles
 
-Osobni macOS dotfiles spravovane pres [chezmoi](https://www.chezmoi.io/).
+Personal macOS dotfiles managed with [chezmoi](https://www.chezmoi.io/).
 
-Repo je zamerne public. Patri sem konfigurace, ne citliva data: zadne tokeny,
-zadny `gh` auth, zadny opencode config, zadna historie shellu a zadny runtime
-stav aplikaci.
+This repository is intentionally public. It contains configuration only: no
+tokens, no `gh` auth, no opencode config, no shell history, and no application
+runtime state.
 
-## Rychly Start Na Novem Macu
+## Fresh Mac Setup
 
-Na cistem macOS spust:
+Run this on a clean macOS install:
 
 ```sh
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/michtesar/dotfiles/main/install.sh)"
 ```
 
-Bootstrap udela:
+The bootstrap script:
 
-1. overi Xcode Command Line Tools
-2. nainstaluje Homebrew, pokud chybi
-3. nainstaluje chezmoi, pokud chybi
-4. aplikuje toto repo pres `chezmoi`
-5. spusti Homebrew bundle pro core + GUI aplikace
-6. nainstaluje Oh My Zsh, tmux pluginy a VS Code extensions
-7. aplikuje male macOS defaults
+1. checks for Xcode Command Line Tools
+2. installs Homebrew if needed
+3. installs chezmoi if needed
+4. applies this repository with `chezmoi`
+5. runs the core and GUI Homebrew bundles
+6. installs Oh My Zsh, tmux plugins, and VS Code extensions
+7. applies a small set of macOS defaults
 
-Mac App Store aplikace se nespousti automaticky, protoze `mas` je obcas
-nespolehlive i pri prihlasenem App Store uctu.
+Mac App Store apps are not installed automatically because `mas` can be flaky
+even when the App Store GUI is signed in.
 
-## Mentalni Model Chezmoi
+## Chezmoi Mental Model
 
-Chezmoi ma dve dulezita mista:
+Chezmoi has two important locations:
 
 ```text
-target files     skutecne soubory, ktere aplikace pouzivaji
-source state     git repo, ze ktereho chezmoi target files generuje
+target files    the real files read by applications
+source state    the git repo chezmoi uses to generate target files
 ```
 
-Priklady target files:
+Examples of target files:
 
 ```text
 ~/.zshrc
@@ -45,55 +45,55 @@ Priklady target files:
 ~/Library/Application Support/Code/User/settings.json
 ```
 
-Source state je lokalni checkout tohoto repa. Cestu zjistis:
+Find the local source checkout with:
 
 ```sh
 chezmoi source-path
 ```
 
-Chezmoi source typicky lezi tady:
+It usually lives at:
 
 ```text
 ~/.local/share/chezmoi
 ```
 
-V source repu maji soubory specialni jmena:
+Files in the source repo use chezmoi naming conventions:
 
 ```text
 dot_zshrc                         -> ~/.zshrc
 dot_config/tmux/tmux.conf         -> ~/.config/tmux/tmux.conf
 dot_local/bin/executable_foo      -> ~/.local/bin/foo
-private_Library/...               -> ~/Library/... s privatnejsimi permissions
+private_Library/...               -> ~/Library/... with more private permissions
 ```
 
-Jinymi slovy: aplikace ctou normalni soubory v home adresari, ale pravda pro git
-zije v chezmoi source.
+In plain terms: applications read normal files from your home directory, but git
+truth lives in the chezmoi source repo.
 
-## Co Je Spravovane
+## Managed Files
 
-- Homebrew manifesty v `~/.config/homebrew`
+- Homebrew manifests in `~/.config/homebrew`
 - Zsh: `~/.zshrc`, `~/.zprofile`
 - Neovim: `~/.config/nvim`
 - tmux: `~/.config/tmux`
 - btop: `~/.config/btop`
 - Ghostty: `~/Library/Application Support/com.mitchellh.ghostty/config.ghostty`
 - DOSBox Staging: `~/Library/Preferences/DOSBox/dosbox-staging.conf`
-- VS Code user settings, keybindings a seznam extensions
-- male macOS defaults
+- VS Code user settings, keybindings, and extension list
+- a small macOS defaults helper
 
-## Co Neni Spravovane
+## Unmanaged Files
 
 - `~/.config/gh`
 - opencode config
-- SSH klice a secrets
-- shell historie
-- app cache, sessions, workspace state a generated files
-- tmux plugin checkouty
-- VS Code `globalStorage`, `workspaceStorage` a `History`
+- SSH keys and secrets
+- shell history
+- application caches, sessions, workspace state, and generated files
+- tmux plugin checkouts
+- VS Code `globalStorage`, `workspaceStorage`, and `History`
 
 ## Homebrew
 
-Homebrew manifesty jsou v:
+Homebrew manifests live in:
 
 ```text
 ~/.config/homebrew/Brewfile      core CLI/dev tools
@@ -101,36 +101,36 @@ Homebrew manifesty jsou v:
 ~/.config/homebrew/Brewfile.mas  Mac App Store apps
 ```
 
-Nainstaluj defaultni baliky:
+Install the default bundles:
 
 ```sh
 dotfiles-brew
 ```
 
-Nainstaluj Mac App Store baliky explicitne:
+Install the Mac App Store bundle explicitly:
 
 ```sh
 dotfiles-brew --mas
 ```
 
-Kdyz `mas` failne, nejdriv otevri App Store, prihlas se, otevri Purchased nebo
-stranku dane aplikace, a pak zkus MAS command znovu.
+If `mas` fails, open the App Store, sign in, visit the Purchased page or the app
+page, then try the MAS command again.
 
 ## VS Code
 
-Nainstaluj extensions ze seznamu:
+Install extensions from the recorded list:
 
 ```sh
 dotfiles-vscode-extensions
 ```
 
-Aktualizuj seznam extensions podle aktualniho VS Code:
+Refresh the extension list from the current VS Code install:
 
 ```sh
 code --list-extensions | sort > "$(chezmoi source-path)/vscode/extensions.txt"
 ```
 
-Pak zmenu commitni ze source repa:
+Then commit the change from the source repo:
 
 ```sh
 chezmoi cd
@@ -142,99 +142,102 @@ git push
 
 ## macOS Defaults
 
-Aplikuj osobni macOS preference:
+Apply personal macOS preferences:
 
 ```sh
 dotfiles-macos-defaults
 ```
 
-Aktualne to nastavuje tap-to-click, vypina automaticke opravy textu, vypina
-tecku po dvojite mezere a nastavuje aktualni US/Czech input sources.
+This currently enables tap-to-click, disables automatic text corrections,
+disables period insertion after double-space, and applies the current US/Czech
+input source list.
 
-Nektere macOS zmeny se projevi az po logout/login.
+Some macOS changes may require logging out and back in.
 
-## tmux Pluginy
+## tmux Plugins
 
-Plugin checkouty se necommituji. V repu je jen `tmux.conf`, kde jsou pluginy
-deklarovane.
+Plugin checkouts are not committed. The repository only contains `tmux.conf`,
+where plugins are declared.
 
-TPM a pluginy nainstaluj:
+Install TPM and plugins:
 
 ```sh
 dotfiles-tmux-plugins
 ```
 
-V bezicim tmuxu muzes taky pouzit standardni TPM flow:
+Inside a running tmux session, the standard TPM flow also works:
 
 ```text
-prefix + I    install plugins
-prefix + U    update plugins
-prefix + alt+u clean plugins
+prefix + I      install plugins
+prefix + U      update plugins
+prefix + alt+u  clean plugins
 ```
 
-Prefix je v tomto configu `Ctrl-a`.
+The prefix in this config is `Ctrl-a`.
 
-## Kazdodenni Chezmoi Workflow
+## Daily Chezmoi Workflow
 
-Podivej se, co chezmoi spravuje a co by aplikoval:
+See what chezmoi manages and what it would apply:
 
 ```sh
 chezmoi managed
 chezmoi diff
 ```
 
-Aplikuj source state do home adresare:
+Apply source state to your home directory:
 
 ```sh
 chezmoi apply
 ```
 
-Stahni posledni zmeny z GitHubu a aplikuj je:
+Pull the latest changes from GitHub and apply them:
 
 ```sh
 chezmoi update
 ```
 
-Otevri source repo:
+Open the source repo:
 
 ```sh
 chezmoi cd
 ```
 
-## Jak Commitnout Zmenu, Kterou Jsi Udelal V Target Souboru
+## Commit A Change Made In A Target File
 
-Tohle je nejcastejsi situace: upravis normalni config tam, kde ho aplikace
-opravdu pouziva, treba `~/.config/tmux/tmux.conf`. Chezmoi o te zmene vi, ale
-git repo se samo nezmeni. Musis ji prenest do source state.
+This is the most common workflow: you edit the real config file where the app
+reads it, such as `~/.config/tmux/tmux.conf`. Chezmoi can detect that change,
+but the git repo does not update by itself. You need to import the target file
+back into source state.
 
-### Priklad: Upravil Jsem tmux Config
+### Example: Updating tmux Config
 
-1. Zkontroluj rozdil mezi target souborem a source state:
+1. Inspect the difference between the target file and source state:
 
 ```sh
 chezmoi diff ~/.config/tmux/tmux.conf
 ```
 
-2. Pokud zmena vypada spravne, pridej aktualni target soubor do chezmoi source:
+2. If the change looks right, import the current target file into chezmoi
+source:
 
 ```sh
 chezmoi add ~/.config/tmux/tmux.conf
 ```
 
-3. Prejdi do source repa:
+3. Move into the source repo:
 
 ```sh
 chezmoi cd
 ```
 
-4. Zkontroluj git diff:
+4. Inspect the git diff:
 
 ```sh
 git status
 git diff -- dot_config/tmux/tmux.conf
 ```
 
-5. Commitni a pushni:
+5. Commit and push:
 
 ```sh
 git add dot_config/tmux/tmux.conf
@@ -242,10 +245,10 @@ git commit -m "Update tmux config"
 git push
 ```
 
-To je cely tok:
+The whole flow is:
 
 ```text
-upravim ~/.config/tmux/tmux.conf
+edit ~/.config/tmux/tmux.conf
 chezmoi diff ~/.config/tmux/tmux.conf
 chezmoi add ~/.config/tmux/tmux.conf
 chezmoi cd
@@ -255,24 +258,24 @@ git commit
 git push
 ```
 
-## Jak Editovat Pres Chezmoi Rovnou
+## Edit Through Chezmoi Directly
 
-Alternativa je editovat managed soubor pres chezmoi:
+Alternatively, edit a managed file through chezmoi:
 
 ```sh
 chezmoi edit ~/.config/tmux/tmux.conf
 chezmoi apply
 ```
 
-`chezmoi edit` otevira source soubor. `chezmoi apply` ho pak zapise do target
-lokace.
+`chezmoi edit` opens the source file. `chezmoi apply` writes it back to the
+target location.
 
-Tenhle styl je cisty, kdyz vis, ze menis dotfiles. Prime flow pro bezne pouziti
-je ale klidne: upravit realny config, `chezmoi add`, commit.
+This is clean when you know you are editing dotfiles. For normal day-to-day use,
+editing the real config and then running `chezmoi add` is also fine.
 
-## Pridani Noveho Souboru
+## Add A New Managed File
 
-Kdyz chces spravovat novy config:
+To start managing a new config file:
 
 ```sh
 chezmoi add ~/.config/some-tool/config.toml
@@ -283,12 +286,12 @@ git commit -m "Add some-tool config"
 git push
 ```
 
-Pred commitem vzdy zkontroluj, ze v souboru nejsou tokeny nebo machine-local
-hodnoty.
+Before committing, always check that the file does not contain tokens,
+machine-local paths, or generated state.
 
-## Odebrani Spravovaneho Souboru
+## Stop Managing A File
 
-Kdyz uz soubor nechces spravovat, ale chces ho nechat na disku:
+To stop managing a file while leaving it on disk:
 
 ```sh
 chezmoi forget ~/.config/some-tool/config.toml
@@ -299,37 +302,37 @@ git commit -m "Stop managing some-tool config"
 git push
 ```
 
-Kdyz chces soubor odstranit ze source state i z target lokace, pouzij
-`chezmoi remove`. U public dotfiles je ale casto bezpecnejsi nejdriv pouzit
-`forget` a target soubor pripadne smazat rucne.
+If you want to remove the file from both source state and the target location,
+use `chezmoi remove`. For public dotfiles, `forget` is often the safer first
+move; delete the target file manually afterward if needed.
 
-## Lokalne Soukrome Veci
+## Local Private Overrides
 
-Zsh podporuje local hooky, ktere nejsou v gitu:
+Zsh supports local hooks that are not tracked by git:
 
 ```sh
 ~/.zshrc.local
 ~/.zprofile.local
 ```
 
-Sem patri machine-specific aliasy, privatni cesty, experimentalni env vars nebo
-cokoliv, co nechces v public repu.
+Use these for machine-specific aliases, private paths, experimental environment
+variables, or anything that should not live in a public repository.
 
-## Bezpecnostni Checklist Pred Commitem
+## Security Checklist Before Commit
 
-Pred pushem public dotfiles projdi:
+Before pushing public dotfiles, inspect the staged diff:
 
 ```sh
 chezmoi cd
 git diff --cached
 ```
 
-Hledej hlavne:
+Look for:
 
-- tokeny, API keys, auth headery
-- emaily nebo hostnames, ktere nechces verejne
-- private cesty k praci nebo klientum
-- cache, history, session a generated soubory
-- `node_modules`, plugin checkouty a vendor adresare
+- tokens, API keys, and auth headers
+- emails or hostnames you do not want public
+- private work or client paths
+- cache, history, session, and generated files
+- `node_modules`, plugin checkouts, and vendor directories
 
-Kdyz si nejsi jisty, soubor radsi nepridavej a pouzij local override.
+If you are unsure, do not add the file. Use a local override instead.
