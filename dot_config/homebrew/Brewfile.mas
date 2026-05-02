@@ -1,4 +1,4 @@
-# Mac App Store apps. Optional and best-effort.
+# App Store stuff. Optional because mas is moody.
 
 mas "DaisyDisk", id: 411643860
 mas "Infuse", id: 1136220934

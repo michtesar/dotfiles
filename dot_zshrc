@@ -1,6 +1,4 @@
-# ================================
 # Oh My Zsh
-# ================================
 export ZSH="$HOME/.oh-my-zsh"
 
 ZSH_THEME="robbyrussell"
@@ -12,12 +10,7 @@ plugins=(
 
 source "$ZSH/oh-my-zsh.sh"
 
-
-# ================================
-# Homebrew Zsh plugins
-# ================================
-# Loaded manually (not via OMZ)
-
+# Homebrew plugins. Load them directly; OMZ does enough already.
 if [ -f /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
   source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 fi
@@ -26,27 +19,17 @@ if [ -f /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 
   source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
 
-
-# ================================
-# eza (modern ls)
-# ================================
+# Better ls.
 if command -v eza >/dev/null 2>&1; then
   alias ls='eza --group-directories-first --icons=auto'
   alias ll='eza -lah --group-directories-first --git --icons=auto'
 fi
 
-
-# ================================
-# zoxide (smart cd)
-# ================================
+# Better cd.
 if command -v zoxide >/dev/null 2>&1; then
   eval "$(zoxide init zsh)"
 fi
 
-
-# ================================
-# btop
-# ================================
 if command -v btop >/dev/null 2>&1; then
   alias btop='btop --config "$HOME/.config/btop/btop.conf" --no-tty'
 fi

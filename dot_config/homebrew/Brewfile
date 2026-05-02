@@ -1,4 +1,4 @@
-# Core CLI and developer tools.
+# CLI stuff I expect on every machine.
 
 tap "oven-sh/bun"
 

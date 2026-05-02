@@ -38,11 +38,10 @@ function M.setup()
 
   dashboard.section.footer.opts.position = "center"
   dashboard.section.footer.val = {
-    "GenAIQ  //  Michael Tesar, 2025 Bearing Point",
+    "Michael Tesar // dotfiles",
   }
 
-  local content_height = #dashboard.section.header.val + #dashboard.section.buttons.val + #dashboard.section.footer.val +
-  4
+  local content_height = #dashboard.section.header.val + #dashboard.section.buttons.val + #dashboard.section.footer.val + 4
   local top_padding = math.max(2, math.floor((vim.o.lines - content_height) / 2))
 
   dashboard.opts.layout = {
