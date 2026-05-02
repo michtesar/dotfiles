@@ -1,0 +1,104 @@
+{
+    // Editor settings
+    "editor.foldingImportsByDefault": true, // Fold import statements by default
+    "editor.formatOnSave": true, // Format code on save
+    "explorer.excludeGitIgnore": true, // Exclude files in .gitignore from the explorer
+    "search.showLineNumbers": true, // Show line numbers in search results,
+    "editor.minimap.enabled": false, // Disable minimap
+    "search.smartCase": true, // Enable smart case search
+    "workbench.settings.editor": "json", // Open settings in JSON format,
+    "window.commandCenter": false, // Disable command center
+    "window.zoomLevel": 0.85, // Set default zoom level
+    "editor.inlineSuggest.enabled": true, // Enable inline suggestions
+    "editor.smoothScrolling": true, // Enable smooth scrolling
+    "editor.formatOnPaste": true, // Format code on paste,
+    "explorer.confirmDelete": false, // Disable delete confirmation in explorer
+    "files.insertFinalNewline": true, // Ensure files end with a newline
+    "diffEditor.codeLens": true, // Enable code lens in diff editor
+    "debug.toolBarLocation": "docked", // Dock debug toolbar
+    "explorer.confirmDragAndDrop": false,
+    "editor.fontFamily": "JetBrainsMono Nerd Font",
+    "editor.fontLigatures": true,
+    "terminal.integrated.fontFamily": "'JetBrainsMono Nerd Font'",
+    // Git settings
+    "git.blame.ignoreWhitespace": true, // Ignore whitespace changes in git blame
+    "git.autofetch": true, // Automatically fetch changes from the remote repository
+    "git.confirmSync": false, // Disable sync confirmation
+    // Terminal settings
+    "terminal.integrated.cursorStyle": "block",
+    "terminal.integrated.cursorWidth": 4,
+    "terminal.integrated.cursorBlinking": true,
+    // JSON schema settings
+    "json.schemaDownload.trustedDomains": {
+        "https://schemastore.azurewebsites.net/": true,
+        "https://raw.githubusercontent.com/": true,
+        "https://www.schemastore.org/": true,
+        "https://json.schemastore.org/": true,
+        "https://json-schema.org/": true,
+        "https://biomejs.dev": true
+    },
+    // Frontend development settings
+    // Set default formatter for TypeScript and Javascript files
+    "[typescript][typescriptreact][javascript][javascriptreact][css][scss][html]": {
+        "editor.defaultFormatter": "biomejs.biome",
+        "editor.codeActionsOnSave": {
+            "source.fixAll.biome": "always",
+            "source.organizeImports.biome": "always"
+        }
+    },
+    "[jsonc][json]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    // "typescript.updateImportsOnFileMove.enabled": "always",
+    // Python settings
+    "[python]": {
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": "always",
+            "source.fixAll": "always"
+        },
+        "editor.defaultFormatter": "charliermarsh.ruff"
+    },
+    "python.testing.pytestEnabled": true,
+    // Auto Docstring settings
+    "autoDocstring.includeExtendedSummary": true,
+    "autoDocstring.docstringFormat": "google-notypes",
+    // Search settings
+    "search.exclude": {
+        "**/.venv": true,
+        "**/__pycache__": true,
+        "**/dist": true,
+        "**/node_modules": true
+    },
+    // Markdown settings
+    "[markdown]": {
+        "editor.defaultFormatter": "DavidAnson.vscode-markdownlint"
+    },
+    // Disable focus border colors
+    // "workbench.colorCustomizations": {
+    //     "focusBorder": "#00000000",
+    //     "editorGroup.focusedBorder": "#00000000",
+    //     "editor.focusedStackFrameHighlightBackground": "#00000000"
+    // },
+    "terminal.integrated.initialHint": false,
+    "workbench.editor.empty.hint": "hidden",
+    "window.autoDetectColorScheme": true,
+    "workbench.preferredLightColorTheme": "Light Modern",
+    "editor.scrollbar.horizontal": "hidden",
+    "editor.fontSize": 12,
+    "workbench.startupEditor": "none",
+    "files.associations": {
+        ".env*": "dotenv"
+    },
+    "editor.tokenColorCustomizations": {
+        "textMateRules": [
+            {
+                "scope": "keyword.other.dotenv",
+                "settings": {
+                    "foreground": "#FF000000"
+                }
+            }
+        ]
+    },
+    "workbench.preferredDarkColorTheme": "Dark Modern",
+    "redhat.telemetry.enabled": true,
+}

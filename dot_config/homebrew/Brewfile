@@ -1,0 +1,38 @@
+# Core CLI and developer tools.
+
+tap "oven-sh/bun"
+
+brew "git"
+brew "curl"
+brew "wget"
+brew "jq"
+brew "just"
+brew "chezmoi"
+
+brew "neovim"
+brew "tmux"
+brew "fzf"
+brew "eza"
+brew "fd"
+brew "ripgrep"
+brew "btop"
+brew "zoxide"
+brew "zsh-autosuggestions"
+brew "zsh-syntax-highlighting"
+
+brew "gcc"
+brew "node"
+brew "python"
+brew "rust"
+brew "oven-sh/bun/bun"
+brew "uv"
+brew "biome"
+brew "lazygit"
+brew "pre-commit"
+
+brew "podman"
+
+brew "gh"
+brew "mas"
+brew "speedtest-cli"
+brew "fastfetch"

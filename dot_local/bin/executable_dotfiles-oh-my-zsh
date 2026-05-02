@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if [ -d "$HOME/.oh-my-zsh" ]; then
+  exit 0
+fi
+
+if ! command -v curl >/dev/null 2>&1; then
+  printf 'curl is not installed; skipping Oh My Zsh.\n' >&2
+  exit 0
+fi
+
+RUNZSH=no CHSH=no KEEP_ZSHRC=yes \
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"

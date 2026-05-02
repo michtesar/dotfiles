@@ -1,0 +1,16 @@
+# GUI apps and fonts.
+
+cask_args appdir: "~/Applications"
+
+cask "ghostty"
+cask "visual-studio-code"
+cask "podman-desktop"
+
+cask "google-chrome"
+cask "vlc"
+cask "signal"
+cask "steam"
+cask "synology-drive"
+cask "logi-options+"
+
+cask "font-jetbrains-mono-nerd-font"

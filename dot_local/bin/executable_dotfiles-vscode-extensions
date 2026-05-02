@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if command -v chezmoi >/dev/null 2>&1; then
+  extensions_file="$(chezmoi source-path)/vscode/extensions.txt"
+else
+  extensions_file="$HOME/.local/share/chezmoi/vscode/extensions.txt"
+fi
+code_bin=""
+
+if command -v code >/dev/null 2>&1; then
+  code_bin="$(command -v code)"
+elif [ -x "/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code" ]; then
+  code_bin="/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code"
+elif [ -x "$HOME/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code" ]; then
+  code_bin="$HOME/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code"
+fi
+
+if [ -z "$code_bin" ]; then
+  printf 'VS Code CLI was not found; skipping extensions.\n' >&2
+  exit 0
+fi
+
+if [ ! -f "$extensions_file" ]; then
+  printf 'Extension list not found: %s\n' "$extensions_file" >&2
+  exit 1
+fi
+
+while IFS= read -r extension; do
+  [ -n "$extension" ] || continue
+  "$code_bin" --install-extension "$extension"
+done < "$extensions_file"

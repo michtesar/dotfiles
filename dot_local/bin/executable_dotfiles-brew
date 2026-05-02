@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+brew_file_dir="$HOME/.config/homebrew"
+
+if ! command -v brew >/dev/null 2>&1; then
+  printf 'Homebrew is not installed.\n' >&2
+  exit 1
+fi
+
+brew bundle --file "$brew_file_dir/Brewfile"
+brew bundle --file "$brew_file_dir/Brewfile.gui"
+
+if [ "${1:-}" = "--mas" ]; then
+  brew bundle --file "$brew_file_dir/Brewfile.mas"
+fi

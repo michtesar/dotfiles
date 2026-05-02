@@ -1,0 +1,96 @@
+# Ghostty
+#
+# Personal terminal defaults for a macOS development setup.
+# The goal here is not "maximum config"; it is a terminal that feels sharp,
+# calm, and consistent with the rest of the stack:
+#
+# - JetBrains Mono Nerd Font for code, icons, and prompt glyphs.
+# - Catppuccin follows the macOS light/dark appearance.
+# - A little translucency and blur for style, but not so much that reading code
+#   becomes a punishment.
+# - Shell integration stays enabled because Ghostty's prompt awareness,
+#   working-directory inheritance, SSH handling, and prompt jumping are useful.
+#
+# Keep this file opinionated, but boring in the right places.
+
+##### Font #####################################################################
+#
+# JetBrains Mono is the daily-driver coding font. The Nerd Font variant keeps
+# prompt symbols, nvim icons, tmux status glyphs, and CLI UI symbols aligned.
+#
+# I intentionally do not force `font-feature` here. Ghostty/font defaults handle
+# the usual JetBrains Mono ligatures cleanly, and the previous quoted list was
+# parsed into a suspicious single value by `ghostty +show-config`.
+font-family = "JetBrainsMono Nerd Font"
+font-size = 14
+
+# Adds vertical breathing room without changing the font size. If a TUI ever
+# looks vertically misaligned, this is one of the first knobs to revisit.
+adjust-cell-height = 20%
+
+##### Cursor ###################################################################
+#
+# A steady block cursor is readable and unfussy. Shell integration may still
+# change the cursor at prompts, which is fine.
+adjust-cursor-height = 20%
+mouse-hide-while-typing = true
+cursor-style = "block"
+cursor-style-blink = false
+
+##### Window ###################################################################
+#
+# Default new-window geometry. This is intentionally moderate; serious layout
+# management happens in tmux, splits, or macOS window management.
+window-width = 90
+window-height = 25
+window-step-resize = false
+
+# Padding gives the terminal a bit of polish. `window-padding-color = background`
+# avoids a visibly different gutter when opacity/blur is enabled.
+window-padding-balance = false
+window-padding-color = background
+
+window-padding-x = 14
+window-padding-y = 14
+
+##### Shell / macOS #############################################################
+#
+# `true` expands to Ghostty's useful shell integration feature set. That gives
+# better prompt navigation, title handling, sudo/SSH behavior, and cwd inheritance.
+shell-integration-features = true
+
+# Make Ghostty quit like a focused utility app once the last window is gone.
+quit-after-last-window-closed = true
+
+# Intentional risk: close surfaces without confirmation. This is fast, but if
+# long-running commands live outside tmux, consider switching this back to true.
+confirm-close-surface = false
+
+# Keep Option available for macOS text input and Czech/European characters.
+# If terminal Alt/Meta becomes more important, try `left` as a compromise.
+macos-option-as-alt = false
+macos-titlebar-proxy-icon = hidden
+
+# Shift+Enter sends Esc+Enter. Useful in terminal UIs that distinguish a soft
+# newline or alternate submit action from plain Enter.
+keybind = shift+enter=text:\x1b\r
+
+##### Background ###############################################################
+#
+# Style, but still readable. 0.75 looked good, but it makes the desktop compete
+# with code and logs. 0.88 keeps the glassy Ghostty look without turning every
+# terminal session into a contrast test.
+background-opacity = 0.88
+background-blur = 40
+
+# Experiments for macOS glass. Keep commented until you actually want the more
+# aggressive visual treatment.
+# background-opacity = 0.0
+# background-blur = macos-glass-clear
+# background-blur = macos-glass-regular
+#
+##### Theme ####################################################################
+#
+# Match the OS appearance and keep the terminal aligned with the tmux/nvim theme
+# story: Latte in light mode, Mocha in dark mode.
+theme = light:Catppuccin Latte,dark:Catppuccin Mocha

@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+plugin_dir="$HOME/.config/tmux/plugins"
+tpm_dir="$plugin_dir/tpm"
+
+if ! command -v git >/dev/null 2>&1; then
+  printf 'git is not installed; skipping tmux plugins.\n' >&2
+  exit 0
+fi
+
+mkdir -p "$plugin_dir"
+
+if [ ! -d "$tpm_dir/.git" ]; then
+  git clone https://github.com/tmux-plugins/tpm "$tpm_dir"
+fi
+
+if command -v tmux >/dev/null 2>&1; then
+  "$tpm_dir/bin/install_plugins" || true
+fi
