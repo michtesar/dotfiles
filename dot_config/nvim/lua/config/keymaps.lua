@@ -20,9 +20,6 @@ local function lsp_action(method, fallback)
     end
 
     if not has_method then
-      if fallback then
-        return fallback()
-      end
       vim.notify("No attached LSP supports " .. method, vim.log.levels.WARN)
       return
     end
