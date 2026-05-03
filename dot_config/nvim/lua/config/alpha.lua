@@ -11,7 +11,7 @@ local banner = {
   [[        [ root@mechanicles ~/lab ]$ ./build_future --with-robots --no-mercy]],
   [[]],
   [[                 ╔══════════════════════════════════════╗]],
-  [[                 ║   MECHANICLES // ROBOTIC MISCHIEF   ║]],
+  [[                 ║   MECHANICLES // ROBOTIC MISCHIEF    ║]],
   [[                 ╚══════════════════════════════════════╝]],
   [[]],
   [[        ⚙️  code. metal. ghosts in machines.]],
@@ -40,7 +40,8 @@ function M.setup()
     "Michael Tesar // dotfiles",
   }
 
-  local content_height = #dashboard.section.header.val + #dashboard.section.buttons.val + #dashboard.section.footer.val + 4
+  local content_height = #dashboard.section.header.val + #dashboard.section.buttons.val + #dashboard.section.footer.val +
+  4
   local top_padding = math.max(2, math.floor((vim.o.lines - content_height) / 2))
 
   dashboard.opts.layout = {
