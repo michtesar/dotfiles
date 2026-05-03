@@ -1,5 +1,36 @@
 local map = vim.keymap.set
 
+local function lsp_action(method, fallback)
+  return function()
+    local clients = vim.lsp.get_clients({ bufnr = 0 })
+    if #clients == 0 then
+      if fallback then
+        return fallback()
+      end
+      vim.notify("No LSP client attached", vim.log.levels.WARN)
+      return
+    end
+
+    local has_method = false
+    for _, client in ipairs(clients) do
+      if client.supports_method(method) then
+        has_method = true
+        break
+      end
+    end
+
+    if not has_method then
+      if fallback then
+        return fallback()
+      end
+      vim.notify("No attached LSP supports " .. method, vim.log.levels.WARN)
+      return
+    end
+
+    return fallback()
+  end
+end
+
 for _, key in ipairs({ "<Up>", "<Down>", "<Left>", "<Right>" }) do
   map({ "n", "v", "i" }, key, "<Nop>", { desc = "Disable arrow keys" })
 end
@@ -20,6 +51,10 @@ map("n", "<leader>.", "<cmd>Telescope oldfiles<CR>", { desc = "Recent files (qui
 map("n", "[d", vim.diagnostic.goto_prev, { desc = "Previous diagnostic" })
 map("n", "]d", vim.diagnostic.goto_next, { desc = "Next diagnostic" })
 map("n", "<leader>e", vim.diagnostic.open_float, { desc = "Line diagnostics" })
+map("n", "gd", lsp_action(vim.lsp.protocol.Methods.textDocument_definition, vim.lsp.buf.definition), { desc = "Go to definition" })
+map("n", "gD", lsp_action(vim.lsp.protocol.Methods.textDocument_declaration, vim.lsp.buf.declaration), { desc = "Go to declaration" })
+map("n", "gr", lsp_action(vim.lsp.protocol.Methods.textDocument_references, vim.lsp.buf.references), { desc = "Find references" })
+map("n", "gi", lsp_action(vim.lsp.protocol.Methods.textDocument_implementation, vim.lsp.buf.implementation), { desc = "Go to implementation" })
 map("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code action" })
 map("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename symbol" })
 
